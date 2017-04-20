@@ -141,6 +141,53 @@
                         </v-card>
                     </v-modal>
 
+                    <v-modal v-model="formularioCssM">
+                        <v-card>
+                            <v-card-title>Formulario</v-card-title>
+                            <v-card-text>
+                                <v-row>
+                                    <v-col xs12>
+                                        <v-text-field name="Nome" label="Nome"/>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col xs12>
+                                        <v-select
+                                                v-bind:items="valido"
+                                                v-model="valor"
+                                                label="Validado no Workfinity?"
+                                                item-value="text"/>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col xs12>
+                                        <v-text-field name="Usuario" label="Nome do Usuario"/>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col xs12>
+                                        <v-select
+                                                v-bind:items="status"
+                                                v-model="stato"
+                                                label="Status"
+                                                item-value="text"/>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col xs12>
+                                        <v-text-field name="Senha" label="Senha" type="password"/>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col xs12 class="text-aling-right ">
+                                        <v-btn primary>ENVIAR</v-btn>
+                                        <v-btn primary>CANCELAR</v-btn>
+                                    </v-col>
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+                    </v-modal>
+
                     <v-modal v-model="detalhes">
                         <v-card>
 
@@ -292,7 +339,7 @@
                         </v-card>
                     </v-modal>
 
-                    <v-modal class="abobrinha" v-model="formulario2Col">
+                    <v-modal class="modal-medium" v-model="formulario2Col">
                         <v-card>
 
                             <v-toolbar class="primary">
@@ -348,7 +395,7 @@
                             </v-card-text>
                         </v-card>
                     </v-modal>
-                    <v-modal class="abobrinha" v-model="detalhes2Col">
+                    <v-modal class="modal-medium" v-model="detalhes2Col">
                         <v-card>
 
                             <v-toolbar class="primary">
@@ -469,7 +516,7 @@
 
                     <!-- Novo Cliente -->
 
-                    <!--<v-row>
+                    <!-- <v-row>
                         <v-col xs12>
                             <p class="grey&#45;&#45;text lighten-2 pl-3">Novo Cliente</p>
                         </v-col>
@@ -538,7 +585,7 @@
                                 </v-col>
                             </v-row>
                         </v-card-text>
-                    </v-card>-->
+                    </v-card> -->
 
                     <!-- END Novo Cliente -->
 
@@ -604,114 +651,115 @@
 
                     <!-- detalhes com paginadores -->
 
+                    <v-row>
+                        <p class="grey--text lighten-2 pl-4">Detalhes</p>
+                    </v-row>
+
                     <v-card>
-                    <v-tabs
-                      id="mobile-tabs-1"
-                      grow
-                      scroll-bars
-                      v-bind:model="active"
-                    >
-                      <v-tab-item
-                        v-bind:href="'#01'"
-                        ripple
-                        slot="activators"
-                      >
-                        Item 01
-                      </v-tab-item>
+                        <v-tabs
+                          grow
+                        >
+                          <v-tab-item
+                            v-bind:href="'#01'"
+                            ripple
+                            slot="activators"
+                          >
+                            Item 01
+                          </v-tab-item>
 
-                      <v-tab-content
-                      v-bind:id=" '01' "
-                        slot="content"
-                      >
-                        <v-card>
-                          <v-card-text>
-                              <v-row>
-                                  <v-col xs4>
-                                      <p>Nome</p>
-                                      <p><b>Gustavo</b></p>
-                                  </v-col>
-                                  <v-col xs4>
-                                      <p>Validado no Workfinity?</p>
-                                      <p class="green&#45;&#45;text">Sim</p>
-                                  </v-col>
-                                  <v-col xs4>
-                                      <p>Status</p>
-                                      <p class="green&#45;&#45;text">Habilitado</p>
-                                  </v-col>
-                              </v-row>
-                              <v-row>
-                                  <v-col xs4>
-                                      <p>Nome do Usuario</p>
-                                      <p><b>Gustavo</b></p>
-                                  </v-col>
-                                  <v-col xs4>
-                                      <p>Email</p>
-                                      <p><b>Gustavo@hotmail.com</b></p>
-                                  </v-col>
-                                  <v-col xs4>
-                                      <p>Contratante</p>
-                                      <p><b>BANRISUL</b></p>
-                                  </v-col>
-                              </v-row>
-                              <v-row>
-                                  <v-col xs4>
-                                      <p>Tipo de documento</p>
-                                      <p><b>CPF</b></p>
-                                  </v-col>
-                                  <v-col xs4>
-                                      <p>Número do Documento</p>
-                                      <p><b>99638266015</b></p>
-                                  </v-col>
-                                  <v-col xs4>
-                                      <p>CEP</p>
-                                      <p><b>22666999</b></p>
-                                  </v-col>
-                              </v-row>
-                              <v-row>
-                                  <v-col class="text-aling-right" xs12>
-                                      <v-btn primary>Voltar</v-btn>
-                                  </v-col>
-                              </v-row>
-                          </v-card-text>
-                        </v-card>
-                      </v-tab-content>
+                          <v-tab-content
+                          v-bind:id=" '01' "
+                            slot="content"
+                          >
+                            <v-card>
+                              <v-card-text>
+                                  <v-row>
+                                      <v-col xs4>
+                                          <p>Nome</p>
+                                          <p><b>Gustavo</b></p>
+                                      </v-col>
+                                      <v-col xs4>
+                                          <p>Validado no Workfinity?</p>
+                                          <p class="green&#45;&#45;text">Sim</p>
+                                      </v-col>
+                                      <v-col xs4>
+                                          <p>Status</p>
+                                          <p class="green&#45;&#45;text">Habilitado</p>
+                                      </v-col>
+                                  </v-row>
+                                  <v-row>
+                                      <v-col xs4>
+                                          <p>Nome do Usuario</p>
+                                          <p><b>Gustavo</b></p>
+                                      </v-col>
+                                      <v-col xs4>
+                                          <p>Email</p>
+                                          <p><b>Gustavo@hotmail.com</b></p>
+                                      </v-col>
+                                      <v-col xs4>
+                                          <p>Contratante</p>
+                                          <p><b>BANRISUL</b></p>
+                                      </v-col>
+                                  </v-row>
+                                  <v-row>
+                                      <v-col xs4>
+                                          <p>Tipo de documento</p>
+                                          <p><b>CPF</b></p>
+                                      </v-col>
+                                      <v-col xs4>
+                                          <p>Número do Documento</p>
+                                          <p><b>99638266015</b></p>
+                                      </v-col>
+                                      <v-col xs4>
+                                          <p>CEP</p>
+                                          <p><b>22666999</b></p>
+                                      </v-col>
+                                  </v-row>
+                                  <v-row>
+                                      <v-col class="text-aling-right" xs12>
+                                          <v-btn primary>Voltar</v-btn>
+                                      </v-col>
+                                  </v-row>
+                              </v-card-text>
+                            </v-card>
+                          </v-tab-content>
 
-                      <v-tab-item
-                        v-bind:href="'#02'"
-                        ripple
-                        slot="activators"
-                      >
-                        Item 02
-                      </v-tab-item>
-                      <v-tab-content
-                        v-bind:id=" '02' "
-                        slot="content"
-                      >
-                        <v-card>
-                          <v-card-text>
-                              conteudo 02
-                          </v-card-text>
-                        </v-card>
-                      </v-tab-content>
+                          <v-tab-item
+                            v-bind:href="'#02'"
+                            ripple
+                            slot="activators"
+                          >
+                            Item 02
+                          </v-tab-item>
+                          <v-tab-content
+                            v-bind:id=" '02' "
+                            slot="content"
+                          >
+                            <v-card>
+                              <v-card-text>
+                                  conteudo 02
+                              </v-card-text>
+                            </v-card>
+                          </v-tab-content>
 
-                      <v-tab-item
-                        v-bind:href="'#03'"
-                        ripple
-                        slot="activators"
-                      >
-                        Item 03
-                      </v-tab-item>
-                      <v-tab-content
-                        v-bind:id=" '03' "
-                        slot="content"
-                      >
-                        <v-card>
-                          <v-card-text>
-                              conteudo 03
-                          </v-card-text>
-                        </v-card>
-                      </v-tab-content>
-                    </v-tabs>
+                          <v-tab-item
+                            v-bind:href="'#03'"
+                            ripple
+                            slot="activators"
+                          >
+                            Item 03
+                          </v-tab-item>
+                          <v-tab-content
+                            v-bind:id=" '03' "
+                            slot="content"
+                          >
+                            <v-card>
+                              <v-card-text>
+                                  conteudo 03
+                              </v-card-text>
+                            </v-card>
+                          </v-tab-content>
+                        </v-tabs>
                     </v-card>
 
                     <!-- END detalhes com aginadores -->
@@ -739,10 +787,11 @@
         item: {
           text: 'Get Started'
         },
-        detalhes2Col: true,
+        detalhes2Col: false,
         formulario2Col: false,
         formulario: false,
         formularioB: false,
+        formularioCssM: true,
         detalhes: false,
         detalhesB: false,
         valor:{},
@@ -976,11 +1025,10 @@
         box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.14), 0 1px 10px rgba(0, 0, 0, 0.12);
     }
 
-    .modal__container .modal--active {
-        min-width:;
-    }
-
-    .abobrinha div.modal {
+    .modal-medium div.modal {
         width: 800px;
+    }
+    .modal-large  div.modal {
+        width: 1000px;
     }
 </style>
