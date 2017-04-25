@@ -11,196 +11,200 @@
                 <v-container>
 
                     <!-- Clientes Cadastrados -->
+                    <div v-show="clientesCadastrados" v-model="clientesCadastrados">
+                        <v-row>
+                            <v-col xs12>
+                                <p class="grey--text lighten-2 pl-4 ml-2">Clientes cadastrados</p>
+                            </v-col>
+                        </v-row>
 
-                    <!--<v-row>
-                       <v-col xs12>
-                           <p class="grey&#45;&#45;text lighten-2 pl-4 ml-2">Clientes cadastrados</p>
-                       </v-col>
-                   </v-row>
-
-                   <v-card>
-                       <v-data-table
-                               v-bind:headers="headers"
-                               v-model="items"
-                               class="elevation-1"
-                       >
-                           <template slot="items" scope="props">
-                               <td>{{ props.item.contratante }}</td>
-                               <td>{{ props.item.documento }}</td>
-                               <td>{{ props.item.nome }}</td>
-                               <td>
-                                   <p v-bind:class="[props.item.alert]">
-                                       {{ props.item.status }}
-                                   </p>
-                               </td>
-                               <td class="text-xs-right">
-                                   <v-btn icon="icon" class="grey&#45;&#45;text">
-                                       <v-icon>create</v-icon>
-                                   </v-btn>
-                                   <v-btn icon="icon" class="grey&#45;&#45;text">
-                                       <v-icon>more_vert</v-icon>
-                                   </v-btn>
-                               </td>
-                           </template>
-                       </v-data-table>
-                   </v-card>-->
-
+                        <v-card>
+                            <v-data-table
+                                    v-bind:headers="headers"
+                                    v-model="items"
+                                    class="elevation-1"
+                            >
+                                <template slot="items" scope="props">
+                                    <td>{{ props.item.contratante }}</td>
+                                    <td>{{ props.item.documento }}</td>
+                                    <td>{{ props.item.nome }}</td>
+                                    <td>
+                                        <p v-bind:class="[props.item.alert]">
+                                            {{ props.item.status }}
+                                        </p>
+                                    </td>
+                                    <td class="text-xs-right">
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>create</v-icon>
+                                        </v-btn>
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>more_vert</v-icon>
+                                        </v-btn>
+                                    </td>
+                                </template>
+                            </v-data-table>
+                        </v-card>
+                    </div>
                     <!-- END Clientes Cadastrados -->
 
                     <!-- Clientes Cadastrados / Filtros -->
 
-                    <!--<v-row>
-                        <v-col xs12>
-                            <p class="grey&#45;&#45;text lighten-2 pl-4 ml-2">Clientes cadastrados</p>
-                        </v-col>
-                    </v-row>
+                    <div v-show="clientesCadastradosF" v-model="clientesCadastradosF">
+                        <v-row>
+                            <v-col xs12>
+                                <p class="grey--text lighten-2 pl-4 ml-2">Clientes cadastrados</p>
+                            </v-col>
+                        </v-row>
 
-                    <v-expansion-panel class="mb-4 primary white&#45;&#45;text">
-                        <v-expansion-panel-content class="">
-                            &lt;!&ndash;<v-subheader slot="header">
-                                <v-icon>add</v-icon>
-                                <span>Filtros</span>
-                            </v-subheader>&ndash;&gt;
-                            <div slot="header">
-                                Filtros
-                            </div>
-                            <v-card>
-                                <v-card-row>
-                                    <v-card-text>
-                                        <v-row>
-                                            <v-col xs4>
-                                                <v-text-field name="nome" label="Nome"/>
-                                            </v-col>
-                                            <v-col xs4>
-                                                <v-select
-                                                        v-bind:items="status"
-                                                        v-model="stato"
-                                                        label="Status"
-                                                        item-value="text"/>
-                                            </v-col>
-                                            <v-col xs4>
-                                                <v-text-field name="documento" label="Número de Documento"/>
-                                            </v-col>
+                        <v-expansion-panel class="mb-4 primary white--text">
+                            <v-expansion-panel-content class="">
+                                <!--<v-subheader slot="header">
+                                    <v-icon>add</v-icon>
+                                    <span>Filtros</span>
+                                </v-subheader>-->
+                                <div slot="header">
+                                    Filtros
+                                </div>
+                                <v-card>
+                                    <v-card-row>
+                                        <v-card-text>
+                                            <v-row>
+                                                <v-col xs4>
+                                                    <v-text-field name="nome" label="Nome"/>
+                                                </v-col>
+                                                <v-col xs4>
+                                                    <v-select
+                                                            v-bind:items="status"
+                                                            v-model="stato"
+                                                            label="Status"
+                                                            item-value="text"/>
+                                                </v-col>
+                                                <v-col xs4>
+                                                    <v-text-field name="documento" label="Número de Documento"/>
+                                                </v-col>
 
-                                        </v-row>
-                                    </v-card-text>
-                                </v-card-row>
-                                <v-card-row actions>
-                                    <v-btn small class="primary">
-                                        <v-icon>search</v-icon>
-                                        Pesquisar
-                                    </v-btn>
-                                    <v-btn small class="primary">
-                                        <v-icon>add</v-icon>
-                                        Novo
-                                    </v-btn>
-                                </v-card-row>
-                            </v-card>
-                        </v-expansion-panel-content>
-                    </v-expansion-panel>
+                                            </v-row>
+                                        </v-card-text>
+                                    </v-card-row>
+                                    <v-card-row actions>
+                                        <v-btn small class="primary">
+                                            <v-icon>search</v-icon>
+                                            Pesquisar
+                                        </v-btn>
+                                        <v-btn small class="primary">
+                                            <v-icon>add</v-icon>
+                                            Novo
+                                        </v-btn>
+                                    </v-card-row>
+                                </v-card>
+                            </v-expansion-panel-content>
+                        </v-expansion-panel>
 
-                    <v-card>
-                        <v-data-table
-                                v-bind:headers="headers"
-                                v-model="items"
-                                class="elevation-1"
-                        >
-                            <template slot="items" scope="props">
-                                <td>{{ props.item.contratante }}</td>
-                                <td>{{ props.item.documento }}</td>
-                                <td>{{ props.item.nome }}</td>
-                                <td>
-                                    <p v-bind:class="[props.item.alert]">
-                                        {{ props.item.status }}
-                                    </p>
-                                </td>
-                                <td class="text-xs-right">
-                                    <v-btn icon="icon" class="grey&#45;&#45;text">
-                                        <v-icon>create</v-icon>
-                                    </v-btn>
-                                    <v-btn icon="icon" class="grey&#45;&#45;text">
-                                        <v-icon>more_vert</v-icon>
-                                    </v-btn>
-                                </td>
-                            </template>
-                        </v-data-table>
-                    </v-card>-->
+                        <v-card>
+                            <v-data-table
+                                    v-bind:headers="headers"
+                                    v-model="items"
+                                    class="elevation-1"
+                            >
+                                <template slot="items" scope="props">
+                                    <td>{{ props.item.contratante }}</td>
+                                    <td>{{ props.item.documento }}</td>
+                                    <td>{{ props.item.nome }}</td>
+                                    <td>
+                                        <p v-bind:class="[props.item.alert]">
+                                            {{ props.item.status }}
+                                        </p>
+                                    </td>
+                                    <td class="text-xs-right">
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>create</v-icon>
+                                        </v-btn>
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>more_vert</v-icon>
+                                        </v-btn>
+                                    </td>
+                                </template>
+                            </v-data-table>
+                        </v-card>
+                    </div>
 
                     <!-- Clientes Cadastrados / Filtros -->
 
                     <!-- Clientes Cadastrados / Filtros / Boleano -->
 
-                    <v-subheader class="my-3">
-                        <span>Clientes cadastrados</span>
-                        <v-spacer></v-spacer>
-                        <v-btn v-on:click.native="filtros = !filtros" icon class="grey--text">
-                            <v-icon>filter_list</v-icon>
-                        </v-btn>
-                    </v-subheader>
+                    <div v-show="clientesCadastradosFB" v-model="clientesCadastradosFB">
+                        <v-subheader class="my-3">
+                            <span>Clientes cadastrados</span>
+                            <v-spacer></v-spacer>
+                            <v-btn v-on:click.native="filtros = !filtros" icon class="grey--text">
+                                <v-icon>filter_list</v-icon>
+                            </v-btn>
+                        </v-subheader>
 
-                    <v-expansion-panel v-show="filtros">
-                        <v-expansion-panel-content v-model="filtros" class="mb-4">
-                            <v-card>
-                                <v-card-row>
-                                    <v-card-text>
-                                        <v-row>
-                                            <v-col xs4>
-                                                <v-text-field name="nome" label="Nome"/>
-                                            </v-col>
-                                            <v-col xs4>
-                                                <v-select
-                                                        v-bind:items="status"
-                                                        v-model="stato"
-                                                        label="Status"
-                                                        item-value="text"/>
-                                            </v-col>
-                                            <v-col xs4>
-                                                <v-text-field name="documento" label="Número de Documento"/>
-                                            </v-col>
+                        <v-expansion-panel v-show="filtros">
+                            <v-expansion-panel-content v-model="filtros" class="mb-4">
+                                <v-card>
+                                    <v-card-row>
+                                        <v-card-text>
+                                            <v-row>
+                                                <v-col xs4>
+                                                    <v-text-field name="nome" label="Nome"/>
+                                                </v-col>
+                                                <v-col xs4>
+                                                    <v-select
+                                                            v-bind:items="status"
+                                                            v-model="stato"
+                                                            label="Status"
+                                                            item-value="text"/>
+                                                </v-col>
+                                                <v-col xs4>
+                                                    <v-text-field name="documento" label="Número de Documento"/>
+                                                </v-col>
 
-                                        </v-row>
-                                    </v-card-text>
-                                </v-card-row>
-                                <v-card-row actions>
-                                    <v-btn small class="primary">
-                                        <v-icon>search</v-icon>
-                                        Pesquisar
-                                    </v-btn>
-                                    <v-btn small class="primary">
-                                        <v-icon>add</v-icon>
-                                        Novo
-                                    </v-btn>
-                                </v-card-row>
-                            </v-card>
-                        </v-expansion-panel-content>
-                    </v-expansion-panel>
+                                            </v-row>
+                                        </v-card-text>
+                                    </v-card-row>
+                                    <v-card-row actions>
+                                        <v-btn small class="primary">
+                                            <v-icon>search</v-icon>
+                                            Pesquisar
+                                        </v-btn>
+                                        <v-btn small class="primary">
+                                            <v-icon>add</v-icon>
+                                            Novo
+                                        </v-btn>
+                                    </v-card-row>
+                                </v-card>
+                            </v-expansion-panel-content>
+                        </v-expansion-panel>
 
-                    <v-card>
-                        <v-data-table
-                                v-bind:headers="headers"
-                                v-model="items"
-                                class="elevation-1"
-                        >
-                            <template slot="items" scope="props">
-                                <td>{{ props.item.contratante }}</td>
-                                <td>{{ props.item.documento }}</td>
-                                <td>{{ props.item.nome }}</td>
-                                <td>
-                                    <p v-bind:class="[props.item.alert]">
-                                        {{ props.item.status }}
-                                    </p>
-                                </td>
-                                <td class="text-xs-right">
-                                    <v-btn icon="icon" class="grey--text">
-                                        <v-icon>create</v-icon>
-                                    </v-btn>
-                                    <v-btn icon="icon" class="grey--text">
-                                        <v-icon>more_vert</v-icon>
-                                    </v-btn>
-                                </td>
-                            </template>
-                        </v-data-table>
-                    </v-card>
+                        <v-card>
+                            <v-data-table
+                                    v-bind:headers="headers"
+                                    v-model="items"
+                                    class="elevation-1"
+                            >
+                                <template slot="items" scope="props">
+                                    <td>{{ props.item.contratante }}</td>
+                                    <td>{{ props.item.documento }}</td>
+                                    <td>{{ props.item.nome }}</td>
+                                    <td>
+                                        <p v-bind:class="[props.item.alert]">
+                                            {{ props.item.status }}
+                                        </p>
+                                    </td>
+                                    <td class="text-xs-right">
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>create</v-icon>
+                                        </v-btn>
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>more_vert</v-icon>
+                                        </v-btn>
+                                    </td>
+                                </template>
+                            </v-data-table>
+                        </v-card>
+                    </div>
 
                     <!-- Clientes Cadastrados / Filtros / Boleano -->
 
@@ -352,7 +356,7 @@
                         </v-card-row>
                     </v-dialog>
 
-                    <v-dialog v-model="detalhes">
+                    <v-dialog v-model="modalDetalhes">
 
                         <v-toolbar class="primary">
                             <v-icon class="white--text">info</v-icon>
@@ -713,283 +717,312 @@
 
                     <!-- Novo Cliente -->
 
-                    <!--<v-row>
-                        <v-col xs12>
-                            <p class="grey&#45;&#45;text lighten-2 pl-3">Novo Cliente</p>
-                        </v-col>
-                    </v-row>
+                    <div v-show="novoCliente" v-model="novoCliente">
+                        <v-row>
+                            <v-col xs12>
+                                <p class="grey--text lighten-2 pl-3">Novo Cliente</p>
+                            </v-col>
+                        </v-row>
 
-                    <v-card>
-                        <v-card-text>
-                            <v-row>
-                                <v-col xs4>
-                                    <v-text-field name="Nome" label="Nome"/>
-                                </v-col>
-                                <v-col xs4>
-                                    <v-select
-                                            v-bind:items="valido"
-                                            v-model="valor"
-                                            label="Validado no Workfinity?"
-                                            item-value="text"/>
-                                </v-col>
-                                <v-col xs4>
-                                    <v-select
-                                            v-bind:items="status"
-                                            v-model="stato"
-                                            label="Status"
-                                            item-value="text"/>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col xs4>
-                                    <v-text-field name="Usuario" label="Nome do Usuario"/>
-                                </v-col>
-                                <v-col xs4>
-                                    <v-text-field name="Senha" label="Senha" type="password"/>
-                                </v-col>
-                                <v-col xs4>
-                                    <v-text-field name="Email" label="Email" type="e-mail"/>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col xs3>
-                                    <v-select
-                                            v-bind:items="documento"
-                                            v-model="tipo"
-                                            label="Tipo de Documento"
-                                            item-value="text"
-                                    />
-                                </v-col>
-                                <v-col xs3>
-                                    <v-text-field name="documento" label="Número do Documento"/>
-                                </v-col>
-                                <v-col xs3>
-                                    <v-select
-                                            v-bind:items="contratante"
-                                            v-model="TipoContratante"
-                                            label="Tipo do Contratante"
-                                            item-value="text"
-                                    />
-                                </v-col>
-                                <v-col xs3>
-                                    <v-text-field name="cep" label="CEP"/>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col xs12 sm6>
-                                    <v-menu
-                                            :close-on-content-click="false"
-                                    >
-                                        <v-text-field
-                                                slot="activator"
-                                                label="Data"
-                                                v-model="e3"
-                                        ></v-text-field>
-                                        <v-date-picker v-model="e3" no-title scrollable actions>
-                                            <template scope="{ save, cancel }">
-                                                <v-card-row actions>
-                                                    <v-btn flat primary @click.native="cancel()">Cancel</v-btn>
-                                                    <v-btn flat primary @click.native="save()">Save</v-btn>
-                                                </v-card-row>
-                                            </template>
-                                        </v-date-picker>
-                                    </v-menu>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col class="text-aling-right" xs12>
-                                    <v-btn primary>ENVIAR</v-btn>
-                                    <v-btn primary>VOLTAR</v-btn>
-                                </v-col>
-                            </v-row>
-                        </v-card-text>
-                    </v-card>-->
+                        <v-card>
+                            <v-card-text>
+                                <v-row>
+                                    <v-col xs4>
+                                        <v-text-field name="Nome" label="Nome"/>
+                                    </v-col>
+                                    <v-col xs4>
+                                        <v-select
+                                                v-bind:items="valido"
+                                                v-model="valor"
+                                                label="Validado no Workfinity?"
+                                                item-value="text"/>
+                                    </v-col>
+                                    <v-col xs4>
+                                        <v-select
+                                                v-bind:items="status"
+                                                v-model="stato"
+                                                label="Status"
+                                                item-value="text"/>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col xs4>
+                                        <v-text-field name="Usuario" label="Nome do Usuario"/>
+                                    </v-col>
+                                    <v-col xs4>
+                                        <v-text-field name="Senha" label="Senha" type="password"/>
+                                    </v-col>
+                                    <v-col xs4>
+                                        <v-text-field name="Email" label="Email" type="e-mail"/>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col xs3>
+                                        <v-select
+                                                v-bind:items="documento"
+                                                v-model="tipo"
+                                                label="Tipo de Documento"
+                                                item-value="text"
+                                        />
+                                    </v-col>
+                                    <v-col xs3>
+                                        <v-text-field name="documento" label="Número do Documento"/>
+                                    </v-col>
+                                    <v-col xs3>
+                                        <v-select
+                                                v-bind:items="contratante"
+                                                v-model="TipoContratante"
+                                                label="Tipo do Contratante"
+                                                item-value="text"
+                                        />
+                                    </v-col>
+                                    <v-col xs3>
+                                        <v-text-field name="cep" label="CEP"/>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col xs12 sm6>
+                                        <v-menu
+                                                :close-on-content-click="false"
+                                        >
+                                            <v-text-field
+                                                    slot="activator"
+                                                    label="Data"
+                                                    v-model="e3"
+                                            ></v-text-field>
+                                            <v-date-picker v-model="e3" no-title scrollable actions>
+                                                <template scope="{ save, cancel }">
+                                                    <v-card-row actions>
+                                                        <v-btn flat primary @click.native="cancel()">Cancel</v-btn>
+                                                        <v-btn flat primary @click.native="save()">Save</v-btn>
+                                                    </v-card-row>
+                                                </template>
+                                            </v-date-picker>
+                                        </v-menu>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col class="text-aling-right" xs12>
+                                        <v-btn primary>ENVIAR</v-btn>
+                                        <v-btn primary>VOLTAR</v-btn>
+                                    </v-col>
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+                    </div>
 
                     <!-- END Novo Cliente -->
 
                     <!-- Detalhes -->
+                    <div v-show="detalhes" v-model="detalhes">
+                        <v-row>
+                            <p class="grey--text lighten-2 pl-4">Detalhes</p>
+                        </v-row>
 
-                    <!--<v-row>
-                        <p class="grey&#45;&#45;text lighten-2 pl-4">Detalhes</p>
-                    </v-row>
-
-                    <v-card>
-                        <v-card-text>
-                            <v-row>
-                                <v-col xs4>
-                                    <p>Nome</p>
-                                    <p><b>Gustavo</b></p>
-                                </v-col>
-                                <v-col xs4>
-                                    <p>Validado no Workfinity?</p>
-                                    <p class="green&#45;&#45;text">Sim</p>
-                                </v-col>
-                                <v-col xs4>
-                                    <p>Status</p>
-                                    <p class="green&#45;&#45;text">Habilitado</p>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col xs4>
-                                    <p>Nome do Usuario</p>
-                                    <p><b>Gustavo</b></p>
-                                </v-col>
-                                <v-col xs4>
-                                    <p>Email</p>
-                                    <p><b>Gustavo@hotmail.com</b></p>
-                                </v-col>
-                                <v-col xs4>
-                                    <p>Contratante</p>
-                                    <p><b>BANRISUL</b></p>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col xs4>
-                                    <p>Tipo de documento</p>
-                                    <p><b>CPF</b></p>
-                                </v-col>
-                                <v-col xs4>
-                                    <p>Número do Documento</p>
-                                    <p><b>99638266015</b></p>
-                                </v-col>
-                                <v-col xs4>
-                                    <p>CEP</p>
-                                    <p><b>22666999</b></p>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col class="text-aling-right" xs12>
-                                    <v-btn primary>Voltar</v-btn>
-                                </v-col>
-                            </v-row>
-                        </v-card-text>
-                    </v-card>-->
+                        <v-card>
+                            <v-card-text>
+                                <v-row>
+                                    <v-col xs4>
+                                        <p>Nome</p>
+                                        <p><b>Gustavo</b></p>
+                                    </v-col>
+                                    <v-col xs4>
+                                        <p>Validado no Workfinity?</p>
+                                        <p class="green--text">Sim</p>
+                                    </v-col>
+                                    <v-col xs4>
+                                        <p>Status</p>
+                                        <p class="green--text">Habilitado</p>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col xs4>
+                                        <p>Nome do Usuario</p>
+                                        <p><b>Gustavo</b></p>
+                                    </v-col>
+                                    <v-col xs4>
+                                        <p>Email</p>
+                                        <p><b>Gustavo@hotmail.com</b></p>
+                                    </v-col>
+                                    <v-col xs4>
+                                        <p>Contratante</p>
+                                        <p><b>BANRISUL</b></p>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col xs4>
+                                        <p>Tipo de documento</p>
+                                        <p><b>CPF</b></p>
+                                    </v-col>
+                                    <v-col xs4>
+                                        <p>Número do Documento</p>
+                                        <p><b>99638266015</b></p>
+                                    </v-col>
+                                    <v-col xs4>
+                                        <p>CEP</p>
+                                        <p><b>22666999</b></p>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col class="text-aling-right" xs12>
+                                        <v-btn primary>Voltar</v-btn>
+                                    </v-col>
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+                    </div>
 
                     <!-- END Detalhes -->
 
                     <!-- detalhes com paginadores -->
 
-                    <!--<v-row>
-                        <p class="grey&#45;&#45;text lighten-2 pl-4">Detalhes</p>
-                    </v-row>
+                    <div v-show="detalhesPaginadores" v-model="detalhesPaginadores">
+                        <v-row>
+                            <p class="grey--text lighten-2 pl-4">Detalhes</p>
+                        </v-row>
 
-                    <v-card>
-                        <v-tabs
-                          grow
-                        >
-                          <v-tab-item
-                            v-bind:href="'#01'"
-                            ripple
-                            slot="activators"
-                          >
-                            Item 01
-                          </v-tab-item>
+                        <v-card>
+                            <v-tabs
+                                    grow
+                            >
+                                <v-tab-item
+                                        v-bind:href="'#01'"
+                                        ripple
+                                        slot="activators"
+                                >
+                                    Item 01
+                                </v-tab-item>
 
-                          <v-tab-content
-                          v-bind:id=" '01' "
-                            slot="content"
-                          >
-                            <v-card>
-                              <v-card-text>
-                                  <v-row>
-                                      <v-col xs4>
-                                          <p>Nome</p>
-                                          <p><b>Gustavo</b></p>
-                                      </v-col>
-                                      <v-col xs4>
-                                          <p>Validado no Workfinity?</p>
-                                          <p class="green&#45;&#45;text">Sim</p>
-                                      </v-col>
-                                      <v-col xs4>
-                                          <p>Status</p>
-                                          <p class="green&#45;&#45;text">Habilitado</p>
-                                      </v-col>
-                                  </v-row>
-                                  <v-row>
-                                      <v-col xs4>
-                                          <p>Nome do Usuario</p>
-                                          <p><b>Gustavo</b></p>
-                                      </v-col>
-                                      <v-col xs4>
-                                          <p>Email</p>
-                                          <p><b>Gustavo@hotmail.com</b></p>
-                                      </v-col>
-                                      <v-col xs4>
-                                          <p>Contratante</p>
-                                          <p><b>BANRISUL</b></p>
-                                      </v-col>
-                                  </v-row>
-                                  <v-row>
-                                      <v-col xs4>
-                                          <p>Tipo de documento</p>
-                                          <p><b>CPF</b></p>
-                                      </v-col>
-                                      <v-col xs4>
-                                          <p>Número do Documento</p>
-                                          <p><b>99638266015</b></p>
-                                      </v-col>
-                                      <v-col xs4>
-                                          <p>CEP</p>
-                                          <p><b>22666999</b></p>
-                                      </v-col>
-                                  </v-row>
-                                  <v-row>
-                                      <v-col class="text-aling-right" xs12>
-                                          <v-btn primary>Voltar</v-btn>
-                                      </v-col>
-                                  </v-row>
-                              </v-card-text>
-                            </v-card>
-                          </v-tab-content>
+                                <v-tab-content
+                                        v-bind:id=" '01' "
+                                        slot="content"
+                                >
+                                    <v-card>
+                                        <v-card-text>
+                                            <v-row>
+                                                <v-col xs4>
+                                                    <p>Nome</p>
+                                                    <p><b>Gustavo</b></p>
+                                                </v-col>
+                                                <v-col xs4>
+                                                    <p>Validado no Workfinity?</p>
+                                                    <p class="green--text">Sim</p>
+                                                </v-col>
+                                                <v-col xs4>
+                                                    <p>Status</p>
+                                                    <p class="green--text">Habilitado</p>
+                                                </v-col>
+                                            </v-row>
+                                            <v-row>
+                                                <v-col xs4>
+                                                    <p>Nome do Usuario</p>
+                                                    <p><b>Gustavo</b></p>
+                                                </v-col>
+                                                <v-col xs4>
+                                                    <p>Email</p>
+                                                    <p><b>Gustavo@hotmail.com</b></p>
+                                                </v-col>
+                                                <v-col xs4>
+                                                    <p>Contratante</p>
+                                                    <p><b>BANRISUL</b></p>
+                                                </v-col>
+                                            </v-row>
+                                            <v-row>
+                                                <v-col xs4>
+                                                    <p>Tipo de documento</p>
+                                                    <p><b>CPF</b></p>
+                                                </v-col>
+                                                <v-col xs4>
+                                                    <p>Número do Documento</p>
+                                                    <p><b>99638266015</b></p>
+                                                </v-col>
+                                                <v-col xs4>
+                                                    <p>CEP</p>
+                                                    <p><b>22666999</b></p>
+                                                </v-col>
+                                            </v-row>
+                                            <v-row>
+                                                <v-col class="text-aling-right" xs12>
+                                                    <v-btn primary>Voltar</v-btn>
+                                                </v-col>
+                                            </v-row>
+                                        </v-card-text>
+                                    </v-card>
+                                </v-tab-content>
 
-                          <v-tab-item
-                            v-bind:href="'#02'"
-                            ripple
-                            slot="activators"
-                          >
-                            Item 02
-                          </v-tab-item>
-                          <v-tab-content
-                            v-bind:id=" '02' "
-                            slot="content"
-                          >
-                            <v-card>
-                              <v-card-text>
-                                  conteudo 02
-                              </v-card-text>
-                            </v-card>
-                          </v-tab-content>
+                                <v-tab-item
+                                        v-bind:href="'#02'"
+                                        ripple
+                                        slot="activators"
+                                >
+                                    Item 02
+                                </v-tab-item>
+                                <v-tab-content
+                                        v-bind:id=" '02' "
+                                        slot="content"
+                                >
+                                    <v-card>
+                                        <v-card-text>
+                                            conteudo 02
+                                        </v-card-text>
+                                    </v-card>
+                                </v-tab-content>
 
-                          <v-tab-item
-                            v-bind:href="'#03'"
-                            ripple
-                            slot="activators"
-                          >
-                            Item 03
-                          </v-tab-item>
-                          <v-tab-content
-                            v-bind:id=" '03' "
-                            slot="content"
-                          >
-                            <v-card>
-                              <v-card-text>
-                                  conteudo 03
-                              </v-card-text>
-                            </v-card>
-                          </v-tab-content>
-                        </v-tabs>
-                    </v-card>-->
+                                <v-tab-item
+                                        v-bind:href="'#03'"
+                                        ripple
+                                        slot="activators"
+                                >
+                                    Item 03
+                                </v-tab-item>
+                                <v-tab-content
+                                        v-bind:id=" '03' "
+                                        slot="content"
+                                >
+                                    <v-card>
+                                        <v-card-text>
+                                            conteudo 03
+                                        </v-card-text>
+                                    </v-card>
+                                </v-tab-content>
+                            </v-tabs>
+                        </v-card>
+                    </div>
 
                     <!-- END detalhes com aginadores -->
 
 
                     <!-- buttons -->
-                    <!--<v-row>
-                        <v-col xs12 class="text-aling-right">
-                            <v-btn primary>Modal detalhes</v-btn>
-                            <v-btn primary>Modal Form</v-btn>
+                    <v-row>
+                        <v-col xs3>
+                            <v-btn primary v-on:click.native="clientesCadastrados = !clientesCadastrados">clientes
+                                Cadastrados
+                            </v-btn>
                         </v-col>
-                    </v-row>-->
+                        <v-col xs3>
+                            <v-btn primary v-on:click.native="clientesCadastradosF = !clientesCadastradosF">clientes
+                                Cadastrados Filtros
+                            </v-btn>
+                        </v-col>
+                        <v-col xs4>
+                            <v-btn primary v-on:click.native="clientesCadastradosFB = !clientesCadastradosFB">clientes
+                                Cadastrados Filtros Boleano
+                            </v-btn>
+                        </v-col>
+                        <v-col xs2>
+                            <v-btn primary v-on:click.native="novoCliente = !novoCliente">novo Cliente</v-btn>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col xs6>
+                            <v-btn primary v-on:click.native="detalhes = !detalhes">detalhes</v-btn>
+                        </v-col>
+                        <v-col xs6>
+                            <v-btn primary v-on:click.native="detalhesPaginadores = !detalhesPaginadores">
+                                detalhes com Paginadores
+                            </v-btn>
+                        </v-col>
+                    </v-row>
                     <!-- END buttons -->
 
                 </v-container>
@@ -1006,6 +1039,12 @@
           text: 'Get Started'
         },
         e3:"",
+        clientesCadastrados:true,
+        clientesCadastradosF:false,
+        clientesCadastradosFB:false,
+        novoCliente:false,
+        detalhes:false,
+        detalhesPaginadores:false,
         filtros: false,
         dialogForm: false,
         detalhes2Col: false,
@@ -1013,7 +1052,7 @@
         formulario: false,
         formularioB: false,
         formularioCssM: false,
-        detalhes: false,
+        modalDetalhes: false,
         detalhesB: false,
         valor:{},
         valido:[
@@ -1221,6 +1260,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
 </script>
 
 <style lang="stylus">
@@ -1249,6 +1297,15 @@
     .dialog__container.dialog-large  div.dialog--active {
         width: 1000px;
     }*/
+
+
+
+
+
+
+
+
+
 
 
 
