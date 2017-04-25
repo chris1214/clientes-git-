@@ -12,11 +12,168 @@
 
                     <!-- Clientes Cadastrados -->
 
-                     <v-row>
+                    <!--<v-row>
+                       <v-col xs12>
+                           <p class="grey&#45;&#45;text lighten-2 pl-4 ml-2">Clientes cadastrados</p>
+                       </v-col>
+                   </v-row>
+
+                   <v-card>
+                       <v-data-table
+                               v-bind:headers="headers"
+                               v-model="items"
+                               class="elevation-1"
+                       >
+                           <template slot="items" scope="props">
+                               <td>{{ props.item.contratante }}</td>
+                               <td>{{ props.item.documento }}</td>
+                               <td>{{ props.item.nome }}</td>
+                               <td>
+                                   <p v-bind:class="[props.item.alert]">
+                                       {{ props.item.status }}
+                                   </p>
+                               </td>
+                               <td class="text-xs-right">
+                                   <v-btn icon="icon" class="grey&#45;&#45;text">
+                                       <v-icon>create</v-icon>
+                                   </v-btn>
+                                   <v-btn icon="icon" class="grey&#45;&#45;text">
+                                       <v-icon>more_vert</v-icon>
+                                   </v-btn>
+                               </td>
+                           </template>
+                       </v-data-table>
+                   </v-card>-->
+
+                    <!-- END Clientes Cadastrados -->
+
+                    <!-- Clientes Cadastrados / Filtros -->
+
+                    <!--<v-row>
                         <v-col xs12>
-                            <p class="grey--text lighten-2 pl-4 ml-2">Clientes cadastrados</p>
+                            <p class="grey&#45;&#45;text lighten-2 pl-4 ml-2">Clientes cadastrados</p>
                         </v-col>
                     </v-row>
+
+                    <v-expansion-panel class="mb-4 primary white&#45;&#45;text">
+                        <v-expansion-panel-content class="">
+                            &lt;!&ndash;<v-subheader slot="header">
+                                <v-icon>add</v-icon>
+                                <span>Filtros</span>
+                            </v-subheader>&ndash;&gt;
+                            <div slot="header">
+                                Filtros
+                            </div>
+                            <v-card>
+                                <v-card-row>
+                                    <v-card-text>
+                                        <v-row>
+                                            <v-col xs4>
+                                                <v-text-field name="nome" label="Nome"/>
+                                            </v-col>
+                                            <v-col xs4>
+                                                <v-select
+                                                        v-bind:items="status"
+                                                        v-model="stato"
+                                                        label="Status"
+                                                        item-value="text"/>
+                                            </v-col>
+                                            <v-col xs4>
+                                                <v-text-field name="documento" label="Número de Documento"/>
+                                            </v-col>
+
+                                        </v-row>
+                                    </v-card-text>
+                                </v-card-row>
+                                <v-card-row actions>
+                                    <v-btn small class="primary">
+                                        <v-icon>search</v-icon>
+                                        Pesquisar
+                                    </v-btn>
+                                    <v-btn small class="primary">
+                                        <v-icon>add</v-icon>
+                                        Novo
+                                    </v-btn>
+                                </v-card-row>
+                            </v-card>
+                        </v-expansion-panel-content>
+                    </v-expansion-panel>
+
+                    <v-card>
+                        <v-data-table
+                                v-bind:headers="headers"
+                                v-model="items"
+                                class="elevation-1"
+                        >
+                            <template slot="items" scope="props">
+                                <td>{{ props.item.contratante }}</td>
+                                <td>{{ props.item.documento }}</td>
+                                <td>{{ props.item.nome }}</td>
+                                <td>
+                                    <p v-bind:class="[props.item.alert]">
+                                        {{ props.item.status }}
+                                    </p>
+                                </td>
+                                <td class="text-xs-right">
+                                    <v-btn icon="icon" class="grey&#45;&#45;text">
+                                        <v-icon>create</v-icon>
+                                    </v-btn>
+                                    <v-btn icon="icon" class="grey&#45;&#45;text">
+                                        <v-icon>more_vert</v-icon>
+                                    </v-btn>
+                                </td>
+                            </template>
+                        </v-data-table>
+                    </v-card>-->
+
+                    <!-- Clientes Cadastrados / Filtros -->
+
+                    <!-- Clientes Cadastrados / Filtros / Boleano -->
+
+                    <v-subheader class="my-3">
+                        <span>Clientes cadastrados</span>
+                        <v-spacer></v-spacer>
+                        <v-btn v-on:click.native="filtros = !filtros" icon class="grey--text">
+                            <v-icon>filter_list</v-icon>
+                        </v-btn>
+                    </v-subheader>
+
+                    <v-expansion-panel v-show="filtros">
+                        <v-expansion-panel-content v-model="filtros" class="mb-4">
+                            <v-card>
+                                <v-card-row>
+                                    <v-card-text>
+                                        <v-row>
+                                            <v-col xs4>
+                                                <v-text-field name="nome" label="Nome"/>
+                                            </v-col>
+                                            <v-col xs4>
+                                                <v-select
+                                                        v-bind:items="status"
+                                                        v-model="stato"
+                                                        label="Status"
+                                                        item-value="text"/>
+                                            </v-col>
+                                            <v-col xs4>
+                                                <v-text-field name="documento" label="Número de Documento"/>
+                                            </v-col>
+
+                                        </v-row>
+                                    </v-card-text>
+                                </v-card-row>
+                                <v-card-row actions>
+                                    <v-btn small class="primary">
+                                        <v-icon>search</v-icon>
+                                        Pesquisar
+                                    </v-btn>
+                                    <v-btn small class="primary">
+                                        <v-icon>add</v-icon>
+                                        Novo
+                                    </v-btn>
+                                </v-card-row>
+                            </v-card>
+                        </v-expansion-panel-content>
+                    </v-expansion-panel>
 
                     <v-card>
                         <v-data-table
@@ -45,7 +202,7 @@
                         </v-data-table>
                     </v-card>
 
-                    <!-- END Clientes Cadastrados -->
+                    <!-- Clientes Cadastrados / Filtros / Boleano -->
 
                     <!-- modal -->
                     <v-dialog v-model="detalhesB">
@@ -849,7 +1006,8 @@
           text: 'Get Started'
         },
         e3:"",
-        dialogForm: true,
+        filtros: false,
+        dialogForm: false,
         detalhes2Col: false,
         formulario2Col: false,
         formulario: false,
@@ -864,6 +1022,7 @@
         ],
         stato:{},
         status:[
+            {text: ''},
             {text:'Habilitado'},
             {text:'Desabilitado'}
         ],
@@ -1050,8 +1209,14 @@
          }
         ]
       }
+    },
+    methods: {
     }
   }
+
+
+
+
 
 
 
@@ -1078,12 +1243,16 @@
     .dialog__container .card__title.primary {
         box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.14), 0 1px 10px rgba(0, 0, 0, 0.12);
     }
-    .dialog__container.dialog-medium div.dialog--active {
+    /*.dialog__container.dialog-medium div.dialog--active {
         width: 800px;
     }
     .dialog__container.dialog-large  div.dialog--active {
         width: 1000px;
-    }
+    }*/
+
+
+
+
 
 
 
