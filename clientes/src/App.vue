@@ -1,14 +1,99 @@
 <template>
     <v-app top-toolbar>
         <header>
-            <v-toolbar>
+            <v-toolbar class="elevation-0">
                 <v-toolbar-side-icon/>
                 <v-toolbar-title>Clientes</v-toolbar-title>
+                <v-card-row>
+                    <div class="blue darken-1 px-4 py-1 pesquisa">
+                        <v-text-field prepend-icon="search" label="Search..." hide-details single-line
+                                      dark></v-text-field>
+                    </div>
+
+                    <div>
+                        <v-btn icon="icon" dark>
+                            <v-icon>add</v-icon>
+                        </v-btn>
+                        <v-btn icon="icon" dark v-on:click.native="filtrosToolbar03 = !filtrosToolbar03">
+                            <v-icon>filter_list</v-icon>
+                        </v-btn>
+                    </div>
+                </v-card-row>
             </v-toolbar>
         </header>
         <main>
-            <v-content class="grey lighten-3">
-                <v-container>
+            <v-content class="grey lighten-3 pt-0">
+
+                <v-container fluid>
+
+                    <!--<v-row class="blue darken-2">
+
+                        <v-col offset-xs3 xs5>
+
+                            <div class="blue darken-1 px-4 py-1 pesquisa">
+                                <v-text-field prepend-icon="search" label="Search..." hide-details single-line
+                                              dark></v-text-field>
+                            </div>
+
+                        </v-col>
+                        <v-col xs3>
+
+                            <div>
+                                <v-btn icon="icon" dark>
+                                    <v-icon>add</v-icon>
+                                </v-btn>
+                                <v-btn icon="icon" dark>
+                                    <v-icon>filter_list</v-icon>
+                                </v-btn>
+                            </div>
+
+                        </v-col>
+
+                    </v-row>-->
+
+                    <v-card v-show="filtrosToolbar02" v-model="filtrosToolbar02" class="mb-2">
+                        <v-card-text>
+                            <v-row>
+
+                                <v-col xs2>
+                                    <v-text-field name="nome" label="Nome"/>
+                                </v-col>
+
+                                <v-col xs2>
+                                    <v-select
+                                            v-bind:items="status"
+                                            v-model="stato"
+                                            label="Status"
+                                            item-value="text"/>
+                                </v-col>
+
+                                <v-col xs2>
+                                    <v-text-field name="documento" label="Número de Documento"/>
+                                </v-col>
+
+                                <v-col xs2>
+                                    <v-text-field name="nome" label="Nome"/>
+                                </v-col>
+
+                                <v-col xs2>
+                                    <v-select
+                                            v-bind:items="status"
+                                            v-model="stato"
+                                            label="Status"
+                                            item-value="text"/>
+                                </v-col>
+
+                                <v-col xs2>
+                                    <v-text-field name="documento" label="Número de Documento"/>
+                                </v-col>
+
+                            </v-row>
+                        </v-card-text>
+                    </v-card>
+
+                </v-container>
+
+                <v-container fluid class="container20px">
 
                     <!-- Clientes Cadastrados -->
                     <div v-show="clientesCadastrados" v-model="clientesCadastrados">
@@ -178,6 +263,46 @@
                             </v-expansion-panel-content>
                         </v-expansion-panel>
 
+                        <v-card v-show="filtrosToolbar" v-model="filtrosToolbar">
+                            <v-card-text>
+                                <v-row>
+
+                                    <v-col xs2>
+                                        <v-text-field name="nome" label="Nome"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="status"
+                                                v-model="stato"
+                                                label="Status"
+                                                item-value="text"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="documento" label="Número de Documento"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="nome" label="Nome"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="status"
+                                                v-model="stato"
+                                                label="Status"
+                                                item-value="text"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="documento" label="Número de Documento"/>
+                                    </v-col>
+
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+
                         <v-card>
                             <v-data-table
                                     v-bind:headers="headers"
@@ -206,7 +331,349 @@
                         </v-card>
                     </div>
 
-                    <!-- Clientes Cadastrados / Filtros / Boleano -->
+                    <!-- Clientes Cadastrados / Filtros / Boleano / toolbar -->
+
+                    <div v-show="clientesCadastradosFBT" v-model="clientesCadastradosFBT">
+                        <v-subheader class="my-3">
+                            <span>Filtros</span>
+                            <v-chip close v-model="chip1" v-show="statusCheckbox">Habilitado</v-chip>
+                            <v-chip small close v-model="chip1" v-show="statusCheckbox">Desabiltiado</v-chip>
+                            <v-chip small close v-model="chip1" v-show="nomeCheckbox">Nome</v-chip>
+                            <v-chip small close v-model="chip1" v-show="numeroCheckbox">Numero do documento</v-chip>
+                        </v-subheader>
+
+                        <v-card v-show="filtrosToolbar03" v-model="filtrosToolbar03" class="mb-2">
+                            <v-card-text>
+                                <v-row>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Nome" v-model="nomeCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Status" v-model="statusCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Número do Documento" v-model="numeroCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Status" v-model="statusCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Nome" v-model="nomeCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Número do Documeto" v-model="numeroCheckbox"/>
+                                    </v-col>
+
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+
+                        <v-card v-show="filtrosToolbar" v-model="filtrosToolbar">
+                            <v-card-text>
+                                <v-row>
+
+                                    <v-col xs2>
+                                        <v-text-field name="nome" label="Nome"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="status"
+                                                v-model="stato"
+                                                label="Status"
+                                                item-value="text"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="documento" label="Número de Documento"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="nome" label="Nome"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="status"
+                                                v-model="stato"
+                                                label="Status"
+                                                item-value="text"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="documento" label="Número de Documento"/>
+                                    </v-col>
+
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+
+                        <v-card>
+                            <v-data-table
+                                    v-bind:headers="headers"
+                                    v-model="items"
+                                    class="elevation-1"
+                            >
+                                <template slot="items" scope="props">
+                                    <td>{{ props.item.contratante }}</td>
+                                    <td>{{ props.item.documento }}</td>
+                                    <td>{{ props.item.nome }}</td>
+                                    <td>
+                                        <p v-bind:class="[props.item.alert]">
+                                            {{ props.item.status }}
+                                        </p>
+                                    </td>
+                                    <td class="text-xs-right">
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>create</v-icon>
+                                        </v-btn>
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>more_vert</v-icon>
+                                        </v-btn>
+                                    </td>
+                                </template>
+                            </v-data-table>
+                        </v-card>
+                    </div>
+
+                    <!-- Clientes Cadastrados / Filtros / Boleano / toolbar -->
+
+                    <!-- Clientes Cadastrados / Filtros / Boleano / toolbar / Search-->
+
+                    <div v-show="clientesCadastradosFBTS" v-model="clientesCadastradosFBTS">
+                        <v-subheader class="mt-3">
+                            <span>Filtros</span>
+                        </v-subheader>
+
+                        <v-row class="mb-3">
+                            <v-col xs4>
+                                <div class="grey lighten-1 px-4 py-1 pesquisa">
+                                    <v-text-field prepend-icon="search" label="Search..." hide-details single-line
+                                                  dark></v-text-field>
+                                </div>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col xs12>
+                                <v-chip close v-model="chip1">Habilitado</v-chip>
+                                <v-chip small close v-model="chip1">Desabiltiado</v-chip>
+                                <v-chip small close v-model="chip1">Nome</v-chip>
+                                <v-chip small close v-model="chip1">Numero do documento</v-chip>
+
+                                <v-chip close v-model="chip1">Habilitado</v-chip>
+                                <v-chip small close v-model="chip1">Desabiltiado</v-chip>
+                                <v-chip small close v-model="chip1">Nome</v-chip>
+                                <v-chip small close v-model="chip1">Numero do documento</v-chip>
+
+                                <v-chip close v-model="chip1">Habilitado</v-chip>
+                                <v-chip small close v-model="chip1">Desabiltiado</v-chip>
+                                <v-chip small close v-model="chip1">Nome</v-chip>
+                                <v-chip small close v-model="chip1">Numero do documento</v-chip>
+                            </v-col>
+                        </v-row>
+
+                        <v-card v-show="filtrosToolbar03" v-model="filtrosToolbar03" class="mb-2">
+                            <v-card-text>
+                                <v-row>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Nome" v-model="nomeCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Status" v-model="statusCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Número do Documento" v-model="numeroCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Status" v-model="statusCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Nome" v-model="nomeCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Número do Documeto" v-model="numeroCheckbox"/>
+                                    </v-col>
+
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+
+                        <v-card v-show="filtrosToolbar" v-model="filtrosToolbar">
+                            <v-card-text>
+                                <v-row>
+
+                                    <v-col xs2>
+                                        <v-text-field name="nome" label="Nome"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="status"
+                                                v-model="stato"
+                                                label="Status"
+                                                item-value="text"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="documento" label="Número de Documento"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="nome" label="Nome"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="status"
+                                                v-model="stato"
+                                                label="Status"
+                                                item-value="text"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="documento" label="Número de Documento"/>
+                                    </v-col>
+
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+
+                        <v-card>
+                            <v-data-table
+                                    v-bind:headers="headers"
+                                    v-model="items"
+                                    class="elevation-1"
+                            >
+                                <template slot="items" scope="props">
+                                    <td>{{ props.item.contratante }}</td>
+                                    <td>{{ props.item.documento }}</td>
+                                    <td>{{ props.item.nome }}</td>
+                                    <td>
+                                        <p v-bind:class="[props.item.alert]">
+                                            {{ props.item.status }}
+                                        </p>
+                                    </td>
+                                    <td class="text-xs-right">
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>create</v-icon>
+                                        </v-btn>
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>more_vert</v-icon>
+                                        </v-btn>
+                                    </td>
+                                </template>
+                            </v-data-table>
+                        </v-card>
+                    </div>
+
+                    <!-- Clientes Cadastrados / Filtros / Boleano / toolbar / Search -->
+
+                    <!-- Clientes Cadastrados / Filtros / Lateral -->
+
+                    <!--<div>
+                        <v-subheader class="my-3">
+                            <span>Filtros Ativos</span>
+                            <v-chip close v-model="chip1" v-show="statusCheckbox">Habilitado</v-chip>
+                            <v-chip small close v-model="chip1" v-show="statusCheckbox">Desabiltiado</v-chip>
+                            <v-chip small close v-model="chip1" v-show="nomeCheckbox">Nome</v-chip>
+                            <v-chip small close v-model="chip1" v-show="numeroCheckbox">Numero do documento</v-chip>
+                        </v-subheader>
+
+                        <v-row>
+
+
+                            <v-col xs2>
+                                <v-expansion-panel>
+                                    <v-expansion-panel-content v-model="filtros" class="mb-4">
+                                        <div slot="header">Filtros</div>
+                                        <v-card>
+                                            <v-card-row>
+                                                <v-card-text>
+                                                    <v-row>
+                                                        <v-col xs12>
+                                                            <v-checkbox label="Nome" v-model="nomeCheckbox"/>
+                                                        </v-col>
+                                                    </v-row>
+                                                    <v-row>
+                                                        <v-col xs12>
+                                                            <v-checkbox label="Status" v-model="statusCheckbox"/>
+                                                        </v-col>
+                                                    </v-row>
+                                                    <v-row>
+                                                        <v-col xs12>
+                                                            <v-btn primary v-on:click.native="maisFiltros = !maisFiltros">
+                                                                Mais Filtros
+                                                            </v-btn>
+                                                        </v-col>
+                                                    </v-row>
+                                                </v-card-text>
+                                            </v-card-row>
+                                        </v-card>
+                                    </v-expansion-panel-content>
+                                </v-expansion-panel>
+                                <v-expansion-panel>
+                                    <v-expansion-panel-content v-show="maisFiltros" v-model="maisFiltros" class="mb-4">
+                                        <v-card>
+                                            <v-card-text>
+                                                <v-row>
+                                                    <v-col xs12>
+                                                        <v-text-field label="Número do Documento"/>
+                                                    </v-col>
+                                                    <v-col xs12>
+                                                        <v-text-field label="Contratante"/>
+                                                    </v-col>
+                                                </v-row>
+                                            </v-card-text>
+                                        </v-card>
+                                    </v-expansion-panel-content>
+                                </v-expansion-panel>
+                            </v-col>
+
+                            <v-col xs10>
+                                <v-card>
+                                    <v-data-table
+                                            v-bind:headers="headers"
+                                            v-model="items"
+                                            class="elevation-1"
+                                    >
+                                        <template slot="items" scope="props">
+                                            <td>{{ props.item.contratante }}</td>
+                                            <td>{{ props.item.documento }}</td>
+                                            <td>{{ props.item.nome }}</td>
+                                            <td>
+                                                <p v-bind:class="[props.item.alert]">
+                                                    {{ props.item.status }}
+                                                </p>
+                                            </td>
+                                            <td class="text-xs-right">
+                                                <v-btn icon="icon" class="grey&#45;&#45;text">
+                                                    <v-icon>create</v-icon>
+                                                </v-btn>
+                                                <v-btn icon="icon" class="grey&#45;&#45;text">
+                                                    <v-icon>more_vert</v-icon>
+                                                </v-btn>
+                                            </td>
+                                        </template>
+                                    </v-data-table>
+                                </v-card>
+                            </v-col>
+
+                        </v-row>
+                    </div>-->
+
+                    <!-- Clientes Cadastrados / Filtros / Lateral -->
 
                     <!-- modal -->
                     <v-dialog v-model="detalhesB">
@@ -249,7 +716,7 @@
                                 </v-row>
                                 <v-row>
                                     <v-col xs12 class="text-aling-right">
-                                        <v-btn primary>FECHAR</v-btn>
+                                        <v-btn primary v-on:click.native="detalhesB = !detalhesB">FECHAR</v-btn>
                                     </v-col>
                                 </v-row>
                             </v-card-text>
@@ -507,7 +974,7 @@
                         </v-card-row>
                     </v-dialog>
 
-                    <v-dialog class="modal-medium" v-model="formulario2Col">
+                    <v-dialog v-model="formulario2Col">
                         <v-card-row>
 
                             <v-toolbar class="primary">
@@ -567,7 +1034,7 @@
                         </v-card-row>
                     </v-dialog>
 
-                    <v-dialog class="modal-medium" v-model="detalhes2Col">
+                    <v-dialog v-model="detalhes2Col">
 
                         <v-toolbar class="primary">
                             <v-icon class="white--text">info</v-icon>
@@ -682,7 +1149,7 @@
                         </v-list>
                     </v-dialog>
 
-                    <v-dialog v-model="dialogForm" class="dialog-medium">
+                    <v-dialog v-model="dialogForm">
 
                         <v-card-row>
                             <v-toolbar class="primary">
@@ -1018,8 +1485,20 @@
                             <v-btn primary v-on:click.native="detalhes = !detalhes">detalhes</v-btn>
                         </v-col>
                         <v-col xs6>
-                            <v-btn primary v-on:click.native="detalhesPaginadores = !detalhesPaginadores">
-                                detalhes com Paginadores
+                            <v-btn primary v-on:click.native="formularioB = !formularioB">
+                                formulario Basicos
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col xs6>
+                            <v-btn primary v-on:click.native="clientesCadastradosFBT = !clientesCadastradosFB">clientes
+                                Cadastrados Filtros Boleano Toolbar
+                            </v-btn>
+                        </v-col>
+                        <v-col xs6>
+                            <v-btn primary v-on:click.native="clientesCadastradosFBTS = !clientesCadastradosFB">clientes
+                                Cadastrados Filtros Boleano Toolbar Search
                             </v-btn>
                         </v-col>
                     </v-row>
@@ -1039,9 +1518,19 @@
           text: 'Get Started'
         },
         e3:"",
-        clientesCadastrados:true,
+        maisFiltros:false,
+        numeroCheckbox:false,
+        statusCheckbox:false,
+        nomeCheckbox:false,
+        chip1:true,
+        filtrosToolbar03: false,
+        filtrosToolbar02: false,
+        filtrosToolbar:false,
+        clientesCadastrados:false,
         clientesCadastradosF:false,
         clientesCadastradosFB:false,
+        clientesCadastradosFBT:false,
+        clientesCadastradosFBTS:true,
         novoCliente:false,
         detalhes:false,
         detalhesPaginadores:false,
@@ -1267,8 +1756,6 @@
 
 
 
-
-
 </script>
 
 <style lang="stylus">
@@ -1291,12 +1778,22 @@
     .dialog__container .card__title.primary {
         box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.14), 0 1px 10px rgba(0, 0, 0, 0.12);
     }
-    /*.dialog__container.dialog-medium div.dialog--active {
-        width: 800px;
+    .pesquisa .input-group{
+        margin: 0px;
     }
-    .dialog__container.dialog-large  div.dialog--active {
-        width: 1000px;
-    }*/
+    .pesquisa {
+        padding: 5px 20px;
+        margin: 10px 0;
+    }
+    .pesquisa .input-group .input-group__details{
+        display:none;
+    }
+    .pesquisa .input-group .input-group--text-field .icon{
+        color:
+    }
+    .container20px{
+        margin: 0 20px;
+    }
 
 
 
