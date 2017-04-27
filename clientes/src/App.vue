@@ -5,12 +5,12 @@
                 <v-toolbar-side-icon/>
                 <v-toolbar-title>Clientes</v-toolbar-title>
                 <v-card-row>
-                    <div class="blue darken-1 px-4 py-1 pesquisa">
+                    <div class="blue darken-1 px-4 py-1 pesquisa elevation-1">
                         <v-text-field prepend-icon="search" label="Search..." hide-details single-line
                                       dark></v-text-field>
                     </div>
 
-                    <div>
+                    <div class="ml-3">
                         <v-btn icon="icon" dark>
                             <v-icon>add</v-icon>
                         </v-btn>
@@ -713,6 +713,142 @@
                     </div>
 
                     <!-- Clientes Cadastrados / Filtros / Boleano / modal -->
+
+                    <!-- Clientes Cadastrados / Filtros / Ativos / Boleano / modal -->
+
+                    <div v-show="clientesCadastradosFABM" v-model="clientesCadastradosFABM">
+                        <v-subheader class="mt-3 chips-filtros">
+                            <span>Filtros: </span>
+                            <v-chip class="elevation-0" small close v-model="chipNome">Nome: christopher</v-chip>
+                            <v-chip class="elevation-0" small close v-model="chipDescricao">Descrição: Dscrição</v-chip>
+                            <v-chip class="elevation-0" small close v-model="chipTipo">Tipo: Parte</v-chip>
+                            <v-chip class="elevation-0" small close v-model="chipFabricante">Fabricante: Habilitado</v-chip>
+                            <v-chip class="elevation-0" small close v-model="chipDataDeAbertura">Data de abertura</v-chip>
+                        </v-subheader>
+
+                        <v-row class="chips-filtros">
+                            <v-col xs12>
+                                <v-chip class="elevation-0" small close v-model="chipNome">Nome: christopher</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipDescricao">Descrição: Dscrição</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipTipo">Tipo: Parte</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipFabricante">Fabricante: Habilitado</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipDataDeAbertura">Data de abertura</v-chip>
+
+                                <v-chip class="elevation-0" small close v-model="chipNome">Nome: christopher</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipDescricao">Descrição: Dscrição</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipTipo">Tipo: Parte</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipFabricante">Fabricante: Habilitado</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipDataDeAbertura">Data de abertura</v-chip>
+
+                                <v-chip class="elevation-0" small close v-model="chipNome">Nome: christopher</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipDescricao">Descrição: Dscrição</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipTipo">Tipo: Parte</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipFabricante">Fabricante: Habilitado</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipDataDeAbertura">Data de abertura</v-chip>
+                            </v-col>
+                        </v-row>
+
+                        <v-card v-show="filtrosToolbar03" v-model="filtrosToolbar03" class="mb-2">
+                            <v-card-text>
+                                <v-row>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Nome" v-model="nomeCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Status" v-model="statusCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Número do Documento" v-model="numeroCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Status" v-model="statusCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Nome" v-model="nomeCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Número do Documeto" v-model="numeroCheckbox"/>
+                                    </v-col>
+
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+
+                        <v-card v-show="filtrosToolbar" v-model="filtrosToolbar">
+                            <v-card-text>
+                                <v-row>
+
+                                    <v-col xs2>
+                                        <v-text-field name="nome" label="Nome"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="status"
+                                                v-model="stato"
+                                                label="Status"
+                                                item-value="text"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="documento" label="Número de Documento"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="nome" label="Nome"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="status"
+                                                v-model="stato"
+                                                label="Status"
+                                                item-value="text"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="documento" label="Número de Documento"/>
+                                    </v-col>
+
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+
+                        <v-card>
+                            <v-data-table
+                                    v-bind:headers="headers"
+                                    v-model="items"
+                                    class="elevation-1"
+                            >
+                                <template slot="items" scope="props">
+                                    <td>{{ props.item.contratante }}</td>
+                                    <td>{{ props.item.documento }}</td>
+                                    <td>{{ props.item.nome }}</td>
+                                    <td>
+                                        <p v-bind:class="[props.item.alert]">
+                                            {{ props.item.status }}
+                                        </p>
+                                    </td>
+                                    <td class="text-xs-right">
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>create</v-icon>
+                                        </v-btn>
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>more_vert</v-icon>
+                                        </v-btn>
+                                    </td>
+                                </template>
+                            </v-data-table>
+                        </v-card>
+                    </div>
+
+                    <!-- Clientes Cadastrados / Filtros / Ativso / Boleano / modal -->Z
 
                     <!-- Clientes Cadastrados / Filtros / Lateral -->
 
@@ -1899,7 +2035,8 @@
         clientesCadastrados: false,
         clientesCadastradosF: false,
         clientesCadastradosFB: false,
-        clientesCadastradosFBM: true,
+        clientesCadastradosFBM: false,
+        clientesCadastradosFABM: true,
         clientesCadastradosFBT: false,
         clientesCadastradosFBTS: false,
         novoCliente: false,
