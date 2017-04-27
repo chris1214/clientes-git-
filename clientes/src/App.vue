@@ -1,7 +1,7 @@
 <template>
     <v-app top-toolbar>
         <header>
-            <v-toolbar class="elevation-0">
+            <v-toolbar>
                 <v-toolbar-side-icon/>
                 <v-toolbar-title>Clientes</v-toolbar-title>
                 <v-card-row>
@@ -16,6 +16,9 @@
                         </v-btn>
                         <v-btn icon="icon" dark v-on:click.native="filtrosToolbar03 = !filtrosToolbar03">
                             <v-icon>filter_list</v-icon>
+                        </v-btn>
+                        <v-btn icon="icon" dark>
+                            <v-icon>settings</v-icon>
                         </v-btn>
                     </div>
                 </v-card-row>
@@ -579,6 +582,137 @@
                     </div>
 
                     <!-- Clientes Cadastrados / Filtros / Boleano / toolbar / Search -->
+
+                    <!-- Clientes Cadastrados / Filtros / Boleano / modal -->
+
+                    <div v-show="clientesCadastradosFBM" v-model="clientesCadastradosFBM">
+                        <v-subheader class="mt-3">
+                            <span>Filtros</span>
+                        </v-subheader>
+
+                        <v-row class="chips-filtros">
+                            <v-col xs12>
+                                <v-chip class="elevation-0" small close v-model="chipNome">Nome: christopher</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipDescricao">Descrição: Dscrição</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipTipo">Tipo: Parte</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipFabricante">Fabricante: Habilitado</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipDataDeAbertura">Data de abertura</v-chip>
+
+                                <v-chip class="elevation-0" small close v-model="chipNome">Nome: christopher</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipDescricao">Descrição: Dscrição</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipTipo">Tipo: Parte</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipFabricante">Fabricante: Habilitado</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipDataDeAbertura">Data de abertura</v-chip>
+
+                                <v-chip class="elevation-0" small close v-model="chipNome">Nome: christopher</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipDescricao">Descrição: Dscrição</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipTipo">Tipo: Parte</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipFabricante">Fabricante: Habilitado</v-chip>
+                                <v-chip class="elevation-0" small close v-model="chipDataDeAbertura">Data de abertura</v-chip>
+                            </v-col>
+                        </v-row>
+
+                        <v-card v-show="filtrosToolbar03" v-model="filtrosToolbar03" class="mb-2">
+                            <v-card-text>
+                                <v-row>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Nome" v-model="nomeCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Status" v-model="statusCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Número do Documento" v-model="numeroCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Status" v-model="statusCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Nome" v-model="nomeCheckbox"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-checkbox label="Número do Documeto" v-model="numeroCheckbox"/>
+                                    </v-col>
+
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+
+                        <v-card v-show="filtrosToolbar" v-model="filtrosToolbar">
+                            <v-card-text>
+                                <v-row>
+
+                                    <v-col xs2>
+                                        <v-text-field name="nome" label="Nome"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="status"
+                                                v-model="stato"
+                                                label="Status"
+                                                item-value="text"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="documento" label="Número de Documento"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="nome" label="Nome"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="status"
+                                                v-model="stato"
+                                                label="Status"
+                                                item-value="text"/>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="documento" label="Número de Documento"/>
+                                    </v-col>
+
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+
+                        <v-card>
+                            <v-data-table
+                                    v-bind:headers="headers"
+                                    v-model="items"
+                                    class="elevation-1"
+                            >
+                                <template slot="items" scope="props">
+                                    <td>{{ props.item.contratante }}</td>
+                                    <td>{{ props.item.documento }}</td>
+                                    <td>{{ props.item.nome }}</td>
+                                    <td>
+                                        <p v-bind:class="[props.item.alert]">
+                                            {{ props.item.status }}
+                                        </p>
+                                    </td>
+                                    <td class="text-xs-right">
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>create</v-icon>
+                                        </v-btn>
+                                        <v-btn icon="icon" class="grey--text">
+                                            <v-icon>more_vert</v-icon>
+                                        </v-btn>
+                                    </td>
+                                </template>
+                            </v-data-table>
+                        </v-card>
+                    </div>
+
+                    <!-- Clientes Cadastrados / Filtros / Boleano / modal -->
 
                     <!-- Clientes Cadastrados / Filtros / Lateral -->
 
@@ -1180,6 +1314,223 @@
                         </v-card-row>
                     </v-dialog>
 
+                    <v-dialog v-model="modalEditTwoColumns" width="50%">
+                        <v-card>
+
+                            <!-- <v-card-row>
+                              <v-card-title>
+                                Use Google's location service?
+                              </v-card-title>
+                            </v-card-row> -->
+
+                            <v-toolbar class="white--text primary">
+                                <v-icon>edit</v-icon>
+                                <v-toolbar-title>Editar</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                                <v-btn icon dark v-on:click.native="modalEditTwoColumns = false">
+                                    <v-icon>close</v-icon>
+                                </v-btn>
+                            </v-toolbar>
+
+                            <v-card-text>
+                                <v-row>
+                                    <v-col xs6>
+                                        <v-select
+                                                v-bind:items="['Habilitado', 'Desabilitado']"
+                                                v-model="modalEditarData.status"
+                                                label="Status"
+                                        />
+                                    </v-col>
+                                    <v-col xs6>
+                                        <v-select
+                                                v-bind:items="['D-Link', 'Ingenico']"
+                                                v-model="modalEditarData.fabricante"
+                                                label="Fabricante"
+                                        />
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col xs6>
+                                        <v-select
+                                                v-bind:items="['Produto', 'Parte']"
+                                                v-model="modalEditarData.tipo"
+                                                label="Tipo"
+                                        />
+                                    </v-col>
+                                    <v-col xs6>
+                                        <v-select
+                                                v-bind:items="['Roteador', 'Acessórios']"
+                                                v-model="modalEditarData.familia"
+                                                label="Família de Produtos"
+                                        />
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col xs6>
+                                        <v-switch label="Consumível" primary v-model="modalEditarData.consumivel" />
+                                    </v-col>
+                                    <v-col xs6>
+                                        <v-text-field name="input-1" label="Label Text" />
+                                    </v-col>
+                                </v-row>
+                            </v-card-text>
+
+                            <v-card-row actions>
+                                <v-btn flat v-on:click.native="modalEditTwoColumns = false" class="primary--text">Cancel</v-btn>
+                                <v-btn flat v-on:click.native="modalEditTwoColumns = false" class="primary--text">Submit</v-btn>
+                            </v-card-row>
+                        </v-card>
+                    </v-dialog>
+
+                    <v-dialog v-model="modalColunas" width="90%">
+                        <v-card>
+
+                            <v-toolbar class="white--text primary">
+                                <v-icon>edit</v-icon>
+                                <v-toolbar-title>Filtros</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                                <v-btn icon dark v-on:click.native="modalFilter1 = false">
+                                    <v-icon>close</v-icon>
+                                </v-btn>
+                            </v-toolbar>
+
+                            <v-card-text>
+                                <v-row>
+
+                                    <v-col xs2>
+                                        <v-text-field name="input-1" label="Nome"
+                                                      hint="example of persistent helper text"
+                                                      persistent-hint />
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="input-1" label="Descrição" />
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="['Produto', 'Parte']"
+                                                v-model="modalEditarData.tipo"
+                                                label="Tipo"
+                                        ></v-select>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="['Habilitado', 'Desabilitado']"
+                                                v-model="modalEditarData.status"
+                                                label="Fabricante"
+                                        ></v-select>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-dialog
+                                                persistent
+                                                v-model="modal"
+                                                lazy
+                                        >
+                                            <v-text-field
+                                                    slot="activator"
+                                                    label="Data de abertura"
+                                                    v-model="modalEditarData.date"
+                                                    readonly
+                                            ></v-text-field>
+                                            <v-date-picker v-model="modalEditarData.date" scrollable></v-date-picker>
+                                        </v-dialog>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-select
+                                                v-bind:items="['Habilitado', 'Desabilitado']"
+                                                v-model="modalEditarData.status"
+                                                label="Status"
+                                        ></v-select>
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="input-1" label="Nome"
+                                                      hint="example of persistent helper text"
+                                                      persistent-hint />
+                                    </v-col>
+
+                                    <v-col xs2>
+                                        <v-text-field name="input-1" label="Nome"
+                                                      hint="example of persistent helper text"
+                                                      persistent-hint />
+                                    </v-col>
+
+                                </v-row>
+                            </v-card-text>
+
+                            <v-card-row actions>
+                                <v-btn flat v-on:click.native="modalFilter1 = false" class="primary--text">
+                                    Pesquisar
+                                </v-btn>
+                            </v-card-row>
+                        </v-card>
+                    </v-dialog>
+
+                    <v-dialog v-model="modalFiltroColuna" width="60%">
+                        <v-card>
+
+                            <v-toolbar class="white--text primary">
+                                <v-icon>settings</v-icon>
+                                <v-toolbar-title>Colunas</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                                <v-btn icon dark v-on:click.native="modalFiltroColuna = false">
+                                    <v-icon>close</v-icon>
+                                </v-btn>
+                            </v-toolbar>
+
+                            <v-card-text>
+                                <v-row>
+
+                                    <v-col xs6>
+                                        <v-checkbox label="Contratante" v-model="nomeCheckbox"/>
+                                    </v-col>
+                                    <v-col xs6>
+                                        <v-checkbox label="Número do Documento" v-model="nomeCheckbox"/>
+                                    </v-col>
+                                    <v-col xs6>
+                                        <v-checkbox label="Nome" v-model="nomeCheckbox"/>
+                                    </v-col>
+                                    <v-col xs6>
+                                        <v-checkbox label="Status" v-model="nomeCheckbox"/>
+                                    </v-col>
+                                    <v-col xs6>
+                                        <v-checkbox label="Coluna 5" v-model="nomeCheckbox"/>
+                                    </v-col>
+                                    <v-col xs6>
+                                        <v-checkbox label="Coluna 6" v-model="nomeCheckbox"/>
+                                    </v-col>
+                                    <v-col xs6>
+                                        <v-checkbox label="Coluna 7" v-model="nomeCheckbox"/>
+                                    </v-col>
+                                    <v-col xs6>
+                                        <v-checkbox label="Coluna 8" v-model="nomeCheckbox"/>
+                                    </v-col>
+
+
+<!--
+                                    <v-col xs12>
+                                        <v-checkbox label="Contratante" v-model="nomeCheckbox"/>
+                                        <v-checkbox label="Número do Documento" v-model="nomeCheckbox"/>
+                                        <v-checkbox label="Nome" v-model="nomeCheckbox"/>
+                                        <v-checkbox label="Status" v-model="nomeCheckbox"/>
+                                    </v-col>
+-->
+                                </v-row>
+                            </v-card-text>
+
+                            <v-card-row actions>
+                                <v-btn flat v-on:click.native="modalFiltroColuna = false" class="primary--text">
+                                    Salvar
+                                </v-btn>
+                            </v-card-row>
+                        </v-card>
+                    </v-dialog>
+
+
                     <!-- END modal -->
 
                     <!-- Novo Cliente -->
@@ -1481,12 +1832,17 @@
                         </v-col>
                     </v-row>
                     <v-row>
-                        <v-col xs6>
+                        <v-col xs4>
                             <v-btn primary v-on:click.native="detalhes = !detalhes">detalhes</v-btn>
                         </v-col>
-                        <v-col xs6>
+                        <v-col xs4>
                             <v-btn primary v-on:click.native="formularioB = !formularioB">
                                 formulario Basicos
+                            </v-btn>
+                        </v-col>
+                        <v-col xs4>
+                            <v-btn primary v-on:click.native="clientesCadastradosFBM = !clientesCadastradosFBM">
+                                clientes Cadastrados Fitlros Modal
                             </v-btn>
                         </v-col>
                     </v-row>
@@ -1517,23 +1873,38 @@
         item: {
           text: 'Get Started'
         },
+        modalFiltroColuna: true,
+        modalColunas: false,
+        modal: false,
+        chipNome: true,
+        chipDescricao: true,
+        chipTipo: true,
+        chipFabricante: true,
+        chipDataDeAbertura: true,
+        modalEditTwoColumns: false,
+        modalFilter1: false,
         e3:"",
-        maisFiltros:false,
-        numeroCheckbox:false,
-        statusCheckbox:false,
-        nomeCheckbox:false,
-        chip1:true,
+        chip1: true,
+        nome: true,
+        status: true,
+        numeroDoContratante: true,
+        modalFiltros: true,
+        maisFiltros: false,
+        numeroCheckbox: false,
+        statusCheckbox: false,
+        nomeCheckbox: false,
         filtrosToolbar03: false,
         filtrosToolbar02: false,
-        filtrosToolbar:false,
-        clientesCadastrados:false,
-        clientesCadastradosF:false,
-        clientesCadastradosFB:false,
-        clientesCadastradosFBT:false,
-        clientesCadastradosFBTS:true,
-        novoCliente:false,
-        detalhes:false,
-        detalhesPaginadores:false,
+        filtrosToolbar: false,
+        clientesCadastrados: false,
+        clientesCadastradosF: false,
+        clientesCadastradosFB: false,
+        clientesCadastradosFBM: true,
+        clientesCadastradosFBT: false,
+        clientesCadastradosFBTS: false,
+        novoCliente: false,
+        detalhes: false,
+        detalhesPaginadores: false,
         filtros: false,
         dialogForm: false,
         detalhes2Col: false,
@@ -1544,6 +1915,10 @@
         modalDetalhes: false,
         detalhesB: false,
         valor:{},
+        modalEditarData: {
+            consumivel: true,
+            date: ""
+        },
         valido:[
             {text:'Sim'},
             {text:'Não'}
@@ -1756,6 +2131,7 @@
 
 
 
+
 </script>
 
 <style lang="stylus">
@@ -1794,20 +2170,13 @@
     .container20px{
         margin: 0 20px;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    .chips-filtros span.chip {
+        background: none;
+        border: none;
+        font-size: 12px;
+    }
+    .chips-filtros i.material-icons{
+        font-size: 18px;
+    }
 
 </style>
